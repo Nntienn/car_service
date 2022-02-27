@@ -13,6 +13,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         color: Colors.white,
         padding: const EdgeInsets.fromLTRB(30, 20, 30, 0),
@@ -44,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
             const Padding(
               padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
               child: TextField(
-                keyboardType: TextInputType.number,
+                obscureText: true,
                 style: TextStyle(fontSize: 18, color: Colors.black),
                 decoration: InputDecoration(
                     labelText: "Password",
@@ -62,9 +63,12 @@ class _LoginPageState extends State<LoginPage> {
                 width: double.infinity,
                 height: 52,
                 child: RaisedButton(
-                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return MainPage(); //Routing Home Page in here
-                  }));},
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return MainPage(); //Routing Home Page in here
+                    }));
+                  },
                   child: const Text(
                     "Log In",
                     style: TextStyle(color: Colors.white, fontSize: 18),
@@ -76,6 +80,13 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             _signInButton(),
+            TextButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return RegisterPage(); //Routing Home Page in here
+                  }));
+                },
+                child: Text("Forgot PassWord ?")),
             TextButton(
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {

@@ -1,4 +1,5 @@
 import 'package:car_service/constant.dart';
+import 'package:car_service/servicepage.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -251,7 +252,13 @@ class MyPageState extends State<MainPage> {
   }
 
   Widget service(String img, String title) {
-    return Container(
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) {
+              return ServicePage(); //Routing Home Page in here
+            }));
+      },
       child: Column(
         children: [
           Container(
@@ -277,7 +284,7 @@ class MyPageState extends State<MainPage> {
           ),
           Text(
             title,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
           )
         ],
       ),
@@ -310,6 +317,7 @@ class MyPageState extends State<MainPage> {
     return Container(
       margin: EdgeInsets.only(left: 10),
       width: MediaQuery.of(context).size.width * 0.5,
+      height: MediaQuery.of(context).size.height * 0.12,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -318,7 +326,7 @@ class MyPageState extends State<MainPage> {
         children: [
           Container(
             width: MediaQuery.of(context).size.width * 0.5,
-            height: MediaQuery.of(context).size.height * 0.1,
+            height: MediaQuery.of(context).size.height * 0.09,
             decoration: BoxDecoration(
               image:
                   DecorationImage(image: NetworkImage(img), fit: BoxFit.cover),
