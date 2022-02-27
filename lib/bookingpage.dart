@@ -1,3 +1,8 @@
+
+
+import 'package:car_service/mainpage.dart';
+import 'package:car_service/registerpage.dart';
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -226,12 +231,102 @@ class _BookingPageState extends State<BookingPage> {
                 height: MediaQuery.of(context).size.height * 0.05,
                 padding: EdgeInsets.only(left: 10, right: 10),
                 decoration: BoxDecoration(
-                  color: Colors.greenAccent,
-
+                    color: Colors.greenAccent,
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 child: TextButton(
-                  onPressed: () {  },
-                  child: Text("Booking",),
+                  onPressed: () {
+                    showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        title: const Text('Confirm'),
+                        content: Container(
+                          height: MediaQuery.of(context).size.height*0.2,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text("Customer"),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                children: [
+                                  Text("Name: "),
+                                  Spacer(),
+                                  Text("Andy"),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text("Phone: "),
+                                  Spacer(),
+                                  Text("0123456789"),
+                                ],
+                              ),
+                              Text("Detail"),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                children: [
+                                  Text("Date: "),
+                                  Spacer(),
+                                  Text(DateFormat('dd-MM-yyyy').format(selectedDate).toString()),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text("Time: "),
+                                  Spacer(),
+                                  Text(dropdownValue.toString() +
+                                      ":00 - " +
+                                      (dropdownValue + 1).toString() +
+                                      ":00"),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text("Service: "),
+                                  Spacer(),
+                                  Text("Tire Repair"),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text("Price: "),
+                                  Spacer(),
+                                  Text("1.000.000 - 5.000.000 Vnd"),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'Cancel'),
+                            child: const Text('Cancel'),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              CoolAlert.show(
+                                context: context,
+                                type: CoolAlertType.success,
+                                text: "Booking successful!",
+                                onConfirmBtnTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                    return MainPage(); //Routing Home Page in here
+                                  }));
+                                }
+                              );
+                            },
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  child: Text(
+                    "Booking",
+                  ),
                 )),
           ],
         ),

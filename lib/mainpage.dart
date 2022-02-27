@@ -1,4 +1,5 @@
 import 'package:car_service/constant.dart';
+import 'package:car_service/mappage.dart';
 import 'package:car_service/servicepage.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
@@ -244,7 +245,8 @@ class MyPageState extends State<MainPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){},
+        onPressed: (){Navigator.push(
+            context, MaterialPageRoute(builder: (context) => MapPage()));},
         tooltip: 'NearBy Station',
         child: const Icon(Icons.location_on),
       ),
