@@ -192,7 +192,7 @@ class MyPageState extends State<MainPage> {
                       scrollDirection: Axis.horizontal,
                       children: [
                         station(
-                            "https://toplist.vn/images/800px/dich-vu-sua-chua-o-to-z1-auto-center-215140.jpg",
+                            "https://c1.staticflickr.com/3/2795/32685566571_1d2a8f7e64_c.jpg",
                             "Z1 Auto Center",
                             "580 Lê Văn Khương, P.Thới An, Q. 12 , Tp. HCM"),
                         station(
@@ -256,7 +256,7 @@ class MyPageState extends State<MainPage> {
       onTap: (){
         Navigator.push(context,
             MaterialPageRoute(builder: (context) {
-              return ServicePage(); //Routing Home Page in here
+              return DashboardScreen(); //Routing Home Page in here
             }));
       },
       child: Column(
@@ -292,7 +292,6 @@ class MyPageState extends State<MainPage> {
   }
 
   final List<Widget> imageSliders = [
-    'https://scontent.fsgn2-1.fna.fbcdn.net/v/t39.30808-6/265206345_386344643287118_8095023558319597394_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=e3f864&_nc_ohc=kvyAfAko5j0AX-jT_47&tn=GOM6uiVz5h1YS1gm&_nc_ht=scontent.fsgn2-1.fna&oh=00_AT8rtWJf7oAo5B1-Hj_8Z_XLwm-g91jjwocNkmdmTrHorQ&oe=62123371',
     'http://thuanphatnhatrang.com/uploads/posts/phu_tung_t12.jpg?1638321879182',
     'https://hondatancuong.com.vn/wp-content/uploads/2022/02/dang-tin-web-405x400.jpg',
     'https://www.pjico.com.vn/wp-content/uploads/2016/09/1474342558213_8506718.jpg',

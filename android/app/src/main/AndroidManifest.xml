@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.car_service">
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
    <application
         android:label="car_service"
         android:name="${applicationName}"
@@ -7,6 +9,7 @@
 
        <meta-data android:name="com.google.android.geo.API_KEY"
            android:value="AIzaSyDRLfDdJH8h63zEq6Kip0WfmraPjAReN2U"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
