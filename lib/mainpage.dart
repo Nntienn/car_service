@@ -1,9 +1,11 @@
 import 'package:car_service/constant.dart';
 import 'package:car_service/mappage.dart';
+import 'package:car_service/profilepage.dart';
 import 'package:car_service/servicepage.dart';
+import 'package:car_service/stationpage.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -48,11 +50,18 @@ class MyPageState extends State<MainPage> {
                 children: [
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const [
-                      CircleAvatar(
-                        radius: 30,
-                        backgroundImage: NetworkImage(
-                            "https://th.bing.com/th/id/R.beb43cb8850bde78a0ef0bb12933e138?rik=bXbAnQ4E13oWQQ&pid=ImgRaw&r=0"),
+                    children:  [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) {
+                            return ProfileUI2(); //Routing Home Page in here
+                          }));
+                        },
+                        child: CircleAvatar(
+                          radius: 30,
+                          backgroundImage: NetworkImage(
+                              "https://th.bing.com/th/id/R.beb43cb8850bde78a0ef0bb12933e138?rik=bXbAnQ4E13oWQQ&pid=ImgRaw&r=0"),
+                        ),
                       ),
                       SizedBox(
                         width: 20,
@@ -142,7 +151,7 @@ class MyPageState extends State<MainPage> {
                             color: kPrimaryColor),
                       )),
                   Container(
-                    height: MediaQuery.of(context).size.height * 0.275,
+                    height: MediaQuery.of(context).size.height * 0.17,
                     child: GridView(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 4),
@@ -159,18 +168,6 @@ class MyPageState extends State<MainPage> {
                         service(
                             "https://cdn-icons-png.flaticon.com/512/950/950501.png",
                             "Tire repair"),
-                        service(
-                            "https://cdn-icons-png.flaticon.com/512/4523/4523840.png",
-                            "Engine Wash"),
-                        service(
-                            "https://cdn-icons-png.flaticon.com/512/887/887247.png",
-                            "Spray"),
-                        service(
-                            "https://cdn-icons-png.flaticon.com/512/2114/2114450.png",
-                            "Blower"),
-                        service(
-                            "https://cdn-icons-png.flaticon.com/512/501/501870.png",
-                            "Carpet Clean"),
                       ],
                     ),
                   ),
@@ -195,23 +192,28 @@ class MyPageState extends State<MainPage> {
                         station(
                             "https://c1.staticflickr.com/3/2795/32685566571_1d2a8f7e64_c.jpg",
                             "Z1 Auto Center",
-                            "580 Lê Văn Khương, P.Thới An, Q. 12 , Tp. HCM"),
+                            "580 Lê Văn Khương, P.Thới An, Q. 12 , Tp. HCM",
+                            5),
                         station(
                             "https://vsetgroup.com/uploads/product/z2049193823334_467b3a99072af1fea8310ff4903b9290.jpg",
                             "VS Auto Service",
-                            "15 Bùi Quang Là, P.12, Q. Gò Vấp , Tp. HCM"),
+                            "15 Bùi Quang Là, P.12, Q. Gò Vấp , Tp. HCM",
+                            4.5),
                         station(
                             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0mneaGT6tAcMelcIVqQAMhok4Ejiw0jm6_A&usqp=CAU",
                             "Sữa Chữa Oto TOTCOM",
-                            "262 Tô Hiệu, Hà Cầu, Hà Đông , Hà Nội"),
+                            "262 Tô Hiệu, Hà Cầu, Hà Đông , Hà Nội",
+                            4.8),
                         station(
                             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBQpiT-3q0WXTE-_p9UivYwX8ldh1jefoeYA&usqp=CAU",
                             "Auto Hữu Toàn",
-                            "580 Lê Văn Khương, P.Thới An, Q. 12 , Tp. HCM"),
+                            "580 Lê Văn Khương, P.Thới An, Q. 12 , Tp. HCM",
+                            4),
                         station(
                             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_SNDu4yiDf-ak2wY_cBXQ3-gR2m7Pc6SwQw&usqp=CAU",
                             "Viện Auto",
-                            "580 Lê Văn Khương, P.Thới An, Q. 12 , Tp. HCM"),
+                            "580 Lê Văn Khương, P.Thới An, Q. 12 , Tp. HCM",
+                            4),
                       ],
                     ),
                   ),
@@ -245,8 +247,10 @@ class MyPageState extends State<MainPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){Navigator.push(
-            context, MaterialPageRoute(builder: (context) => MapPage()));},
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => MapPage()));
+        },
         tooltip: 'NearBy Station',
         child: const Icon(Icons.location_on),
       ),
@@ -255,11 +259,10 @@ class MyPageState extends State<MainPage> {
 
   Widget service(String img, String title) {
     return GestureDetector(
-      onTap: (){
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) {
-              return DashboardScreen(); //Routing Home Page in here
-            }));
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return DashboardScreen(); //Routing Home Page in here
+        }));
       },
       child: Column(
         children: [
@@ -314,40 +317,64 @@ class MyPageState extends State<MainPage> {
           ))
       .toList();
 
-  Widget station(String img, String title, String address) {
-    return Container(
-      margin: EdgeInsets.only(left: 10),
-      width: MediaQuery.of(context).size.width * 0.5,
-      height: MediaQuery.of(context).size.height * 0.12,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-      ),
-      child: Column(
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width * 0.5,
-            height: MediaQuery.of(context).size.height * 0.09,
-            decoration: BoxDecoration(
-              image:
-                  DecorationImage(image: NetworkImage(img), fit: BoxFit.cover),
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+  Widget station(String img, String title, String address, double rating) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return StationPage(); //Routing Home Page in here
+        }));
+      },
+      child: Container(
+        margin: EdgeInsets.only(left: 10),
+        width: MediaQuery.of(context).size.width * 0.5,
+        height: MediaQuery.of(context).size.height * 0.12,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
+        child: Column(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width * 0.5,
+              height: MediaQuery.of(context).size.height * 0.09,
+              decoration: BoxDecoration(
+                image:
+                    DecorationImage(image: NetworkImage(img), fit: BoxFit.cover),
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+              ),
             ),
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Text(
-            title,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-          ),
-          Text(
-            address,
-            overflow: TextOverflow.ellipsis,
-          )
-        ],
+            SizedBox(
+              height: 5,
+            ),
+            Text(
+              title,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+            ),
+            Text(
+              address,
+              overflow: TextOverflow.ellipsis,
+            ),
+            RatingBar.builder(
+              ignoreGestures: true,
+              itemSize: 10,
+              initialRating: rating,
+              minRating: 1,
+              direction: Axis.horizontal,
+              allowHalfRating: true,
+              itemCount: 5,
+              itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+              itemBuilder: (context, _) => Icon(
+                Icons.star,
+                color: Colors.amber,
+              ),
+              onRatingUpdate: (rating) {
+                print(rating);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
