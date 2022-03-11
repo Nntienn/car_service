@@ -157,16 +157,16 @@ class MyPageState extends State<MainPage> {
                           crossAxisCount: 4),
                       children: <Widget>[
                         service(
-                            "https://cdn-icons-png.flaticon.com/512/4634/4634554.png",
+                            "https://voxeoto.vn/wp-content/uploads/2020/07/1.jpg",
                             "Wash"),
                         service(
-                            "https://cdn-icons-png.flaticon.com/512/2481/2481576.png",
+                            "https://storage.googleapis.com/f1-cms/2019/09/c7fa6c60-20190906_081453.png",
                             "Interior clean"),
                         service(
-                            "https://cdn-icons-png.flaticon.com/512/5848/5848045.png",
+                            "http://trungtamdaynghethanhxuan.vn/uploads/images/tong-quan-nghe-sua-chua-o-to-1.jpg",
                             "Polishing"),
                         service(
-                            "https://cdn-icons-png.flaticon.com/512/950/950501.png",
+                            "https://vavoluudong.net/wp-content/uploads/2019/12/thay-vo-lop-xe-oto-tai-nha.jpg",
                             "Tire repair"),
                       ],
                     ),
@@ -261,18 +261,18 @@ class MyPageState extends State<MainPage> {
     return GestureDetector(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return DashboardScreen(); //Routing Home Page in here
+          return DashboardScreen(ATitle: title,); //Routing Home Page in here
         }));
       },
       child: Column(
         children: [
           Container(
             width: MediaQuery.of(context).size.width * 0.18,
-            height: MediaQuery.of(context).size.width * 0.18,
+            height: MediaQuery.of(context).size.width * 0.15,
             decoration: BoxDecoration(
-              image: DecorationImage(image: NetworkImage(img), scale: 10),
+              image: DecorationImage(image: NetworkImage(img), scale: 10, fit: BoxFit.cover),
               color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(50)),
+              borderRadius: BorderRadius.all(Radius.circular(10)),
               border: Border.all(color: Colors.lightGreenAccent),
               boxShadow: [
                 BoxShadow(

@@ -1,5 +1,6 @@
 import 'package:car_service/alltransactionpage.dart';
 import 'package:car_service/detailpage.dart';
+import 'package:car_service/loginspage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -126,18 +127,25 @@ class ProfileUI2 extends StatelessWidget {
                 SizedBox(
                   height: 10,
                 ),
-                Card(
-                    margin:
-                        EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-                    elevation: 2.0,
-                    child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 12, horizontal: 30),
-                        child: Text(
-                          "Logout",
-                          style: TextStyle(
-                              letterSpacing: 2.0, fontWeight: FontWeight.w300),
-                        ))),
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      return LoginPage(); //Routing Home Page in here
+                    }));
+                  },
+                  child: Card(
+                      margin:
+                          EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                      elevation: 2.0,
+                      child: Padding(
+                          padding:
+                              EdgeInsets.symmetric(vertical: 12, horizontal: 30),
+                          child: Text(
+                            "Logout",
+                            style: TextStyle(
+                                letterSpacing: 2.0, fontWeight: FontWeight.w300),
+                          ))),
+                ),
                 SizedBox(
                   height: 15,
                 ),

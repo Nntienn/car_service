@@ -43,7 +43,7 @@ dependencies:
   cool_alert: ^1.1.0
   flutter_rating_bar: ^4.0.0
   custom_radio_grouped_button: ^2.1.1
-
+  font_awesome_flutter: ^9.2.0
 
 dev_dependencies:
   flutter_test:

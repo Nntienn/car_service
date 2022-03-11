@@ -36,7 +36,18 @@ class _BookingPageState extends State<BookingPage> {
   }
 
   int dropdownValue = 8;
-
+  Color getColor(Set<MaterialState> states) {
+    const Set<MaterialState> interactiveStates = <MaterialState>{
+      MaterialState.pressed,
+      MaterialState.hovered,
+      MaterialState.focused,
+    };
+    if (states.any(interactiveStates.contains)) {
+      return Colors.blue;
+    }
+    return Colors.red;
+  }
+  bool isChecked = false;
   @override
   void initState() {
     // TODO: implement initState
@@ -164,7 +175,7 @@ class _BookingPageState extends State<BookingPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                type("Booked", Colors.redAccent),
+                type("NotAvailable", Colors.black12),
                 type("Available", Colors.black.withOpacity(0)),
                 type("Picking", Colors.greenAccent)
               ],
@@ -227,6 +238,7 @@ class _BookingPageState extends State<BookingPage> {
               enableButtonWrap: true,
               // width: 120,
               autoWidth: true,
+
               unSelectedColor: Theme.of(context).canvasColor,
               buttonLables: [
                 "Tire repair",
@@ -247,6 +259,17 @@ class _BookingPageState extends State<BookingPage> {
               },
               selectedColor: Colors.greenAccent,
             ),
+            CheckboxListTile(
+              checkColor: Colors.white,
+
+              title: Text("Add more Service"), //    <-- label
+              value: isChecked,
+              onChanged: (bool? value) {
+                setState(() {
+                  isChecked = value!;
+                });
+              },
+            )
           ],
         ),
       ),
@@ -265,7 +288,7 @@ class _BookingPageState extends State<BookingPage> {
                 builder: (BuildContext context) => AlertDialog(
                   title: const Text('Confirm'),
                   content: Container(
-                    height: MediaQuery.of(context).size.height * 0.2,
+                    height: MediaQuery.of(context).size.height * 0.35,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -321,9 +344,43 @@ class _BookingPageState extends State<BookingPage> {
                           children: [
                             Text("Price: "),
                             Spacer(),
-                            Text("1.000.000 - 5.000.000 Vnd"),
+                            Text("Tire repair - 2.000.000 Vnd"),
                           ],
                         ),
+                        Row(
+                          children: [
+                            Spacer(),
+                            Text("RePain - 3.000.000 Vnd"),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: [
+                            Text("Total: "),
+                            Spacer(),
+                            Text("5.000.000 Vnd"),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text("Promotion Code"),
+                        Container(
+                          height: 50,
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            border: Border.all(width: 0.5)
+                          ),
+                          child: TextField(
+                            style: TextStyle(fontSize: 20),
+                            decoration: new InputDecoration.collapsed(
+                                hintText: 'Your Promotion Code'
+                            ),
+                          ),
+                        )
                       ],
                     ),
                   ),
@@ -352,7 +409,7 @@ class _BookingPageState extends State<BookingPage> {
               );
             },
             child: Text(
-              "Booking",
+              "Book",
             ),
           )),
     );

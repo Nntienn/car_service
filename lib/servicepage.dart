@@ -3,16 +3,21 @@ import 'package:flutter/material.dart';
 import 'bookingpage.dart';
 
 class DashboardScreen extends StatefulWidget {
+
+  const DashboardScreen({Key? key, required this.ATitle}) : super(key: key);
+
+  final String ATitle;
   @override
   _DashboardState createState() => _DashboardState();
 }
 
 class _DashboardState extends State<DashboardScreen> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Tire Repair"),
+        title: Text(widget.ATitle),
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,

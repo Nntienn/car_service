@@ -1,6 +1,7 @@
 import 'package:car_service/bookingpage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
 class StationPage extends StatefulWidget {
@@ -151,10 +152,10 @@ class _StationPageState extends State<StationPage> {
                   SizedBox(
                     height: 20,
                   ),
-                  type("Tire Repair", Icon(Icons.car_repair)),
-                  type("Cleaning", Icon(Icons.car_repair)),
-                  type("Engine Repair", Icon(Icons.car_repair)),
-                  type("Re-Pain", Icon(Icons.car_repair)),
+                  type("Tire Repair", Icon(Icons.car_repair), "500.000 vnd"),
+                  type("Cleaning", Icon(FontAwesomeIcons.handsWash), "200.000 vnd"),
+                  type("Engine Repair", Icon(Icons.engineering), "2.000.000 vnd"),
+                  type("Re-Pain", Icon(Icons.format_paint), "2.000.000 vnd"),
                 ],
               ),
             ),
@@ -182,7 +183,7 @@ class _StationPageState extends State<StationPage> {
     );
   }
 
-  Widget type(String service, Icon icon) {
+  Widget type(String service, Icon icon, String price) {
     return Container(
       padding: EdgeInsets.only(left: 10, right: 10),
       margin: EdgeInsets.all(10),
@@ -197,7 +198,13 @@ class _StationPageState extends State<StationPage> {
             service,
             style: TextStyle(fontSize: 15),
             overflow: TextOverflow.ellipsis,
-          )
+          ),
+          Spacer(),
+          Text(
+            price,
+            style: TextStyle(fontSize: 15),
+            overflow: TextOverflow.ellipsis,
+          ),
         ],
       ),
     );

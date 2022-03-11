@@ -160,7 +160,7 @@ class detailpage extends StatelessWidget {
                             CoolAlert.show(
                                 context: context,
                                 type: CoolAlertType.success,
-                                text: "Booking successful!",
+                                text: "Rating successful!",
                                 onConfirmBtnTap: () {
                                   Navigator.pop(context);
                                 });
