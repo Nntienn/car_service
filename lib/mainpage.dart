@@ -1,6 +1,7 @@
 import 'package:car_service/constant.dart';
 import 'package:car_service/mappage.dart';
 import 'package:car_service/profilepage.dart';
+import 'package:car_service/promotionpage.dart';
 import 'package:car_service/servicepage.dart';
 import 'package:car_service/stationpage.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -50,10 +51,11 @@ class MyPageState extends State<MainPage> {
                 children: [
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children:  [
+                    children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
                             return ProfileUI2(); //Routing Home Page in here
                           }));
                         },
@@ -76,7 +78,7 @@ class MyPageState extends State<MainPage> {
                     ],
                   ),
                   SizedBox(
-                    height: 35,
+                    height: 25,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -151,23 +153,31 @@ class MyPageState extends State<MainPage> {
                             color: kPrimaryColor),
                       )),
                   Container(
-                    height: MediaQuery.of(context).size.height * 0.17,
+                    height: MediaQuery.of(context).size.height * 0.15,
                     child: GridView(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 4),
                       children: <Widget>[
                         service(
                             "https://voxeoto.vn/wp-content/uploads/2020/07/1.jpg",
-                            "Wash"),
+                            "Wash",
+                            '500.000 vnd',
+                            "500m"),
                         service(
                             "https://storage.googleapis.com/f1-cms/2019/09/c7fa6c60-20190906_081453.png",
-                            "Interior clean"),
+                            "Interior clean",
+                            '1.000.000 vnd',
+                            "500m"),
                         service(
                             "http://trungtamdaynghethanhxuan.vn/uploads/images/tong-quan-nghe-sua-chua-o-to-1.jpg",
-                            "Polishing"),
+                            "Polishing",
+                            '2.000.000 vnd',
+                            "500m"),
                         service(
                             "https://vavoluudong.net/wp-content/uploads/2019/12/thay-vo-lop-xe-oto-tai-nha.jpg",
-                            "Tire repair"),
+                            "Tire repair",
+                            '4.000.000 vnd',
+                            "500m"),
                       ],
                     ),
                   ),
@@ -184,7 +194,7 @@ class MyPageState extends State<MainPage> {
                     height: 20,
                   ),
                   Container(
-                    height: MediaQuery.of(context).size.height * 0.15,
+                    height: MediaQuery.of(context).size.height * 0.17,
                     width: MediaQuery.of(context).size.width,
                     child: ListView(
                       scrollDirection: Axis.horizontal,
@@ -193,27 +203,32 @@ class MyPageState extends State<MainPage> {
                             "https://c1.staticflickr.com/3/2795/32685566571_1d2a8f7e64_c.jpg",
                             "Z1 Auto Center",
                             "580 Lê Văn Khương, P.Thới An, Q. 12 , Tp. HCM",
-                            5),
+                            5,
+                            "500m"),
                         station(
                             "https://vsetgroup.com/uploads/product/z2049193823334_467b3a99072af1fea8310ff4903b9290.jpg",
                             "VS Auto Service",
                             "15 Bùi Quang Là, P.12, Q. Gò Vấp , Tp. HCM",
-                            4.5),
+                            4.5,
+                            "500m"),
                         station(
                             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0mneaGT6tAcMelcIVqQAMhok4Ejiw0jm6_A&usqp=CAU",
                             "Sữa Chữa Oto TOTCOM",
                             "262 Tô Hiệu, Hà Cầu, Hà Đông , Hà Nội",
-                            4.8),
+                            4.8,
+                            "500m"),
                         station(
                             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBQpiT-3q0WXTE-_p9UivYwX8ldh1jefoeYA&usqp=CAU",
                             "Auto Hữu Toàn",
                             "580 Lê Văn Khương, P.Thới An, Q. 12 , Tp. HCM",
-                            4),
+                            4,
+                            "500m"),
                         station(
                             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_SNDu4yiDf-ak2wY_cBXQ3-gR2m7Pc6SwQw&usqp=CAU",
                             "Viện Auto",
                             "580 Lê Văn Khương, P.Thới An, Q. 12 , Tp. HCM",
-                            4),
+                            4,
+                            "500m"),
                       ],
                     ),
                   ),
@@ -238,7 +253,34 @@ class MyPageState extends State<MainPage> {
                       aspectRatio: 2.0,
                       enlargeCenterPage: true,
                     ),
-                    items: imageSliders,
+                    items: [
+                      'http://thuanphatnhatrang.com/uploads/posts/phu_tung_t12.jpg?1638321879182',
+                      'https://hondatancuong.com.vn/wp-content/uploads/2022/02/dang-tin-web-405x400.jpg',
+                      'https://www.pjico.com.vn/wp-content/uploads/2016/09/1474342558213_8506718.jpg',
+                      'https://static.carmudi.vn/wp-content/uploads/2019-11/o2w9czuRYB.jpg',
+                      'http://thuanphatnhatrang.com/uploads/posts/53a8de7913d1de8f87c0_2.jpg?1643528224216'
+                    ]
+                        .map((item) => GestureDetector(
+                              onTap: () {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return PromotionPage(); //Routing Home Page in here
+                                }));
+                              },
+                              child: Container(
+                                margin: EdgeInsets.all(5.0),
+                                child: ClipRRect(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5.0)),
+                                    child: Stack(
+                                      children: <Widget>[
+                                        Image.network(item,
+                                            fit: BoxFit.cover, width: 1000.0),
+                                      ],
+                                    )),
+                              ),
+                            ))
+                        .toList(),
                   ),
                 ],
               ),
@@ -257,41 +299,72 @@ class MyPageState extends State<MainPage> {
     );
   }
 
-  Widget service(String img, String title) {
+  Widget service(String img, String title, String price, String distance) {
     return GestureDetector(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return DashboardScreen(ATitle: title,); //Routing Home Page in here
+          return DashboardScreen(
+            ATitle: title,
+          ); //Routing Home Page in here
         }));
       },
-      child: Column(
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width * 0.18,
-            height: MediaQuery.of(context).size.width * 0.15,
-            decoration: BoxDecoration(
-              image: DecorationImage(image: NetworkImage(img), scale: 10, fit: BoxFit.cover),
-              color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              border: Border.all(color: Colors.lightGreenAccent),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 1,
-                  blurRadius: 6,
-                  offset: Offset(0, 3), // changes position of shadow
-                ),
-              ],
+      child: Container(
+        height: MediaQuery.of(context).size.height * 0.26,
+        child: Column(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width * 0.18,
+              height: MediaQuery.of(context).size.width * 0.09,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: NetworkImage(img), scale: 10, fit: BoxFit.cover),
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                border: Border.all(color: Colors.lightGreenAccent),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 1,
+                    blurRadius: 6,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+              ),
             ),
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Text(
-            title,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
-          )
-        ],
+            SizedBox(
+              height: 5,
+            ),
+            Text(
+              title,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+            ),
+            RatingBar.builder(
+              ignoreGestures: true,
+              itemSize: 10,
+              initialRating: 5,
+              minRating: 1,
+              direction: Axis.horizontal,
+              allowHalfRating: true,
+              itemCount: 5,
+              itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+              itemBuilder: (context, _) => Icon(
+                Icons.star,
+                color: Colors.amber,
+              ),
+              onRatingUpdate: (rating) {
+                print(rating);
+              },
+            ),
+            Text(
+              price,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+            ),
+            Text(
+              "Nearest: " + distance,
+              style: TextStyle(fontSize: 12),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -304,20 +377,19 @@ class MyPageState extends State<MainPage> {
     'http://thuanphatnhatrang.com/uploads/posts/53a8de7913d1de8f87c0_2.jpg?1643528224216'
   ]
       .map((item) => Container(
-            child: Container(
-              margin: EdgeInsets.all(5.0),
-              child: ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                  child: Stack(
-                    children: <Widget>[
-                      Image.network(item, fit: BoxFit.cover, width: 1000.0),
-                    ],
-                  )),
-            ),
+            margin: EdgeInsets.all(5.0),
+            child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                child: Stack(
+                  children: <Widget>[
+                    Image.network(item, fit: BoxFit.cover, width: 1000.0),
+                  ],
+                )),
           ))
       .toList();
 
-  Widget station(String img, String title, String address, double rating) {
+  Widget station(String img, String title, String address, double rating,
+      String distance) {
     return GestureDetector(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -327,7 +399,7 @@ class MyPageState extends State<MainPage> {
       child: Container(
         margin: EdgeInsets.only(left: 10),
         width: MediaQuery.of(context).size.width * 0.5,
-        height: MediaQuery.of(context).size.height * 0.12,
+        height: MediaQuery.of(context).size.height * 0.17,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -338,11 +410,12 @@ class MyPageState extends State<MainPage> {
               width: MediaQuery.of(context).size.width * 0.5,
               height: MediaQuery.of(context).size.height * 0.09,
               decoration: BoxDecoration(
-                image:
-                    DecorationImage(image: NetworkImage(img), fit: BoxFit.cover),
+                image: DecorationImage(
+                    image: NetworkImage(img), fit: BoxFit.cover),
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10)),
               ),
             ),
             SizedBox(
@@ -373,6 +446,7 @@ class MyPageState extends State<MainPage> {
                 print(rating);
               },
             ),
+            Text("Nearest: " + distance)
           ],
         ),
       ),
