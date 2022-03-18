@@ -1,15 +1,118 @@
 import 'package:car_service/alltransactionpage.dart';
 import 'package:car_service/detailpage.dart';
 import 'package:car_service/loginspage.dart';
+import 'package:car_service/transactionModel.dart';
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-class ProfileUI2 extends StatelessWidget {
+class ProfileUI2 extends StatefulWidget {
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfileUI2> {
   @override
   Widget build(BuildContext context) {
+
+    List<Transaction> list = [
+      Transaction(
+          service: "Tire Repair",
+          station: "Z1 Auto Center",
+          date: "04-02-2022",
+          time: "8:00 - 9:00 AM",
+          price: "3.000.000",
+          status: "Finished"),
+      Transaction(
+          service: "Tire Repair",
+          station: "Z1 Auto Center",
+          date: "04-02-2022",
+          time: "8:00 - 9:00 AM",
+          price: "3.000.000",
+          status: "Finished"),
+      Transaction(
+          service: "Tire Repair",
+          station: "Z1 Auto Center",
+          date: "04-02-2022",
+          time: "8:00 - 9:00 AM",
+          price: "3.000.000",
+          status: "Finished"),
+      Transaction(
+          service: "Tire Repair",
+          station: "Z1 Auto Center",
+          date: "04-02-2022",
+          time: "8:00 - 9:00 AM",
+          price: "3.000.000",
+          status: "Finished"),
+      Transaction(
+          service: "Tire Repair",
+          station: "Z1 Auto Center",
+          date: "04-02-2022",
+          time: "8:00 - 9:00 AM",
+          price: "3.000.000",
+          status: "Pending"),
+    ];
+    Future<void> _showMyDialog(int i)  {
+      return showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Cancel Booking'),
+            content: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  Text('Cancel Reason'),
+                  Container(
+                      padding: EdgeInsets.only(left: 10, right: 10),
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height * 0.3,
+                      decoration: BoxDecoration(
+                          border: Border.all(width: 0.05),
+                          borderRadius:
+                          BorderRadius.all(Radius.circular(10))),
+                      child: TextFormField(
+                        maxLines: 30,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Reason',
+                        ),
+                      )),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: Text('Confirm'),
+                onPressed: ()
+                {
+                  Navigator.of(context).pop();
+                  CoolAlert.show(
+                      context: context,
+                      type: CoolAlertType.success,
+                      text: "Cancel Request Sent!",
+                      onConfirmBtnTap: () {
+                        Navigator.pop(context);
+                      });
+
+
+
+
+                },
+              ),
+              TextButton(
+                child: Text('Cancel'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
     Widget transaction(String service, String station, String date, String time,
-        String price) {
+        String price, String status) {
       return Container(
         child: Row(
           children: [
@@ -38,25 +141,56 @@ class ProfileUI2 extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
+                status == "Finished"
+                    ? Text(
+                        status,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                            color: Colors.greenAccent),
+                      )
+                    : Text(
+                        status,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                            color: Colors.orangeAccent),
+                      ),
                 Text(
                   price + " vnd",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return detailpage(); //Routing Home Page in here
-                    }));
-                  },
-                  child: Text(
-                    "Detail",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                        color: Colors.blue),
-                  ),
-                ),
+                status == "Finished"
+                    ? GestureDetector(
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return detailpage(); //Routing Home Page in here
+                          }));
+                        },
+                        child: Text(
+                          "Detail",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                              color: Colors.blue),
+                        ),
+                      )
+                    : GestureDetector(
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return detailpage(); //Routing Home Page in here
+                          }));
+                        },
+                        child: Text(
+                          "Cancel",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                              color: Colors.redAccent),
+                        ),
+                      ),
               ],
             )
           ],
@@ -128,8 +262,9 @@ class ProfileUI2 extends StatelessWidget {
                   height: 10,
                 ),
                 GestureDetector(
-                  onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
                       return LoginPage(); //Routing Home Page in here
                     }));
                   },
@@ -138,12 +273,13 @@ class ProfileUI2 extends StatelessWidget {
                           EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
                       elevation: 2.0,
                       child: Padding(
-                          padding:
-                              EdgeInsets.symmetric(vertical: 12, horizontal: 30),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 12, horizontal: 30),
                           child: Text(
                             "Logout",
                             style: TextStyle(
-                                letterSpacing: 2.0, fontWeight: FontWeight.w300),
+                                letterSpacing: 2.0,
+                                fontWeight: FontWeight.w300),
                           ))),
                 ),
                 SizedBox(
@@ -238,26 +374,117 @@ class ProfileUI2 extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Divider(),
-                        transaction("Tire Repair", "Z1 Auto Center",
-                            "04-02-2022", "8:00 - 9:00 AM", "3.000.000"),
-                        Divider(),
-                        transaction("Tire Repair", "Z1 Auto Center",
-                            "04-02-2022", "8:00 - 9:00 AM", "3.000.000"),
-                        Divider(),
-                        transaction("Tire Repair", "Z1 Auto Center",
-                            "04-02-2022", "8:00 - 9:00 AM", "3.000.000"),
-                        Divider(),
-                        transaction("Tire Repair", "Z1 Auto Center",
-                            "04-02-2022", "8:00 - 9:00 AM", "3.000.000"),
-                        Divider(),
-                        transaction("Tire Repair", "Z1 Auto Center",
-                            "04-02-2022", "8:00 - 9:00 AM", "3.000.000"),
+                        ListView.builder(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: list.length,
+                            itemBuilder: (BuildContext context, int index) {
+
+                              return Column(
+                                children: [
+                                  Divider(),
+                                  Container(
+                                    child: Row(
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              list[index].service,
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 15),
+                                            ),
+                                            Text(
+                                              list[index].station,
+                                              style: TextStyle(fontSize: 12),
+                                            ),
+                                            Text(
+                                              list[index].date,
+                                              style: TextStyle(fontSize: 12),
+                                            ),
+                                            Text(
+                                              list[index].time,
+                                              style: TextStyle(fontSize: 12),
+                                            ),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            list[index].status == "Finished"
+                                                ? Text(
+                                                    list[index].status,
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 15,
+                                                        color:
+                                                            Colors.greenAccent),
+                                                  )
+                                                : Text(
+                                                    list[index].status,
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 15,
+                                                        color: Colors
+                                                            .orangeAccent),
+                                                  ),
+                                            Text(
+                                              list[index].price + " vnd",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 15),
+                                            ),
+                                            list[index].status == "Finished"
+                                                ? GestureDetector(
+                                                    onTap: () {
+                                                      Navigator.push(context,
+                                                          MaterialPageRoute(
+                                                              builder:
+                                                                  (context) {
+                                                        return detailpage(); //Routing Home Page in here
+                                                      }));
+                                                    },
+                                                    child: Text(
+                                                      "Detail",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 15,
+                                                          color: Colors.blue),
+                                                    ),
+                                                  )
+                                                : GestureDetector(
+                                                    onTap: (){
+                                                      _showMyDialog(index);
+                                                    },
+                                                    child: Text(
+                                                      "Cancel",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 15,
+                                                          color:
+                                                              Colors.redAccent),
+                                                    ),
+                                                  ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              );
+                            })
                       ],
                     ),
                   ),
                 ),
-
               ],
             ),
           ),

@@ -54,7 +54,7 @@ class MyPageState extends State<MainPage> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(context,
+                          Navigator.pushReplacement(context,
                               MaterialPageRoute(builder: (context) {
                             return ProfileUI2(); //Routing Home Page in here
                           }));
