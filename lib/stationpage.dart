@@ -162,50 +162,40 @@ class _StationPageState extends State<StationPage> {
           ],
         ),
       ),
-      bottomNavigationBar: Container(
-          margin: EdgeInsets.all(5),
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 0.05,
-          padding: EdgeInsets.only(left: 10, right: 10),
-          decoration: BoxDecoration(
-              color: Colors.greenAccent,
-              borderRadius: BorderRadius.all(Radius.circular(20))),
-          child: TextButton(
-            onPressed: () {
-              // Navigator.push(context, MaterialPageRoute(builder: (context) {
-              //   return BookingPage(); //Routing Home Page in here
-              // }));
-            },
-            child: Text(
-              "Book Service",
-            ),
-          )),
+
     );
   }
 
   Widget type(String service, Icon icon, String price) {
-    return Container(
-      padding: EdgeInsets.only(left: 10, right: 10),
-      margin: EdgeInsets.all(10),
-      height: 40,
-      child: Row(
-        children: [
-          icon,
-          SizedBox(
-            width: 20,
-          ),
-          Text(
-            service,
-            style: TextStyle(fontSize: 15),
-            overflow: TextOverflow.ellipsis,
-          ),
-          Spacer(),
-          Text(
-            price,
-            style: TextStyle(fontSize: 15),
-            overflow: TextOverflow.ellipsis,
-          ),
-        ],
+    return GestureDetector(
+      onTap: (){
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return BookingPage(ATitle: service,);
+        }));
+      },
+      child: Container(
+        padding: EdgeInsets.only(left: 10, right: 10),
+        margin: EdgeInsets.all(10),
+        height: 40,
+        child: Row(
+          children: [
+            icon,
+            SizedBox(
+              width: 20,
+            ),
+            Text(
+              service,
+              style: TextStyle(fontSize: 15),
+              overflow: TextOverflow.ellipsis,
+            ),
+            Spacer(),
+            Text(
+              price,
+              style: TextStyle(fontSize: 15),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
+        ),
       ),
     );
   }
