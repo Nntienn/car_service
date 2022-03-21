@@ -6,6 +6,7 @@ import 'package:car_service/servicepage.dart';
 import 'package:car_service/stationpage.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class MainPage extends StatefulWidget {
@@ -107,10 +108,10 @@ class MyPageState extends State<MainPage> {
                     ],
                   ),
                   SizedBox(
-                    height: 40,
+                    height: 30,
                   ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
+                    padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
                     child: Theme(
                       data: ThemeData(
                         primaryColor: Colors.white,
@@ -137,7 +138,7 @@ class MyPageState extends State<MainPage> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 10,
             ),
             Container(
               padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -153,10 +154,10 @@ class MyPageState extends State<MainPage> {
                             color: kPrimaryColor),
                       )),
                   Container(
-                    height: MediaQuery.of(context).size.height * 0.15,
-                    child: GridView(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 4),
+                    padding: EdgeInsets.fromLTRB(0, 10 , 0, 10),
+                    height: MediaQuery.of(context).size.height * 0.13,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         service(
                             "https://voxeoto.vn/wp-content/uploads/2020/07/1.jpg",

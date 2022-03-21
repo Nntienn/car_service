@@ -6,6 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class BookingPage extends StatefulWidget {
+  const BookingPage({Key? key, required this.ATitle}) : super(key: key);
+
+  final String ATitle;
+
   @override
   _BookingPageState createState() => _BookingPageState();
 }
@@ -36,6 +40,7 @@ class _BookingPageState extends State<BookingPage> {
   }
 
   int dropdownValue = 8;
+
   Color getColor(Set<MaterialState> states) {
     const Set<MaterialState> interactiveStates = <MaterialState>{
       MaterialState.pressed,
@@ -47,7 +52,13 @@ class _BookingPageState extends State<BookingPage> {
     }
     return Colors.red;
   }
+
   bool isChecked = false;
+  bool isChecked1 = false;
+  bool isChecked2 = false;
+  bool isChecked3 = false;
+  List<String> service = ["Wash", "Interior clean", "Polishing", "Tire repair"];
+
   @override
   void initState() {
     // TODO: implement initState
@@ -56,6 +67,14 @@ class _BookingPageState extends State<BookingPage> {
       if (DateTime.now().hour > time[i] && DateTime.now().hour < 18) {
         time.remove(time[i]);
       }
+    }
+    ;
+    for (int i = 0; i < service.length; i++) {
+      if (service[i] == widget.ATitle) {
+        service.removeAt(i);
+      }
+      print(service.length.toString() +
+          "sdasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasas");
     }
   }
 
@@ -69,209 +88,220 @@ class _BookingPageState extends State<BookingPage> {
       appBar: AppBar(
         title: Text("Booking"),
       ),
-      body: Container(
-        child: ListView(
-          children: [
-            Stack(
+      body: ListView(
+        shrinkWrap: true,
+        children: [
+          Stack(
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.25,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage(
+                            "https://c1.staticflickr.com/3/2795/32685566571_1d2a8f7e64_c.jpg"),
+                        fit: BoxFit.cover)),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.25,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                    colors: [
+                      Colors.black.withOpacity(0.7),
+                      Colors.black.withOpacity(0.0),
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.25,
+                padding: EdgeInsets.all(10),
+                child: const Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Text(
+                    "Z1 Auto Center",
+                    style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                ),
+              )
+            ],
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.07,
+            decoration: BoxDecoration(
+                border:
+                    Border(bottom: BorderSide(color: Colors.black, width: 1))),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.25,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(
-                              "https://c1.staticflickr.com/3/2795/32685566571_1d2a8f7e64_c.jpg"),
-                          fit: BoxFit.cover)),
+                IconButton(
+                    onPressed: () {
+                      setState(() {
+                        if (selectedDate.year >= DateTime.now().year &&
+                            selectedDate.month >= DateTime.now().month &&
+                            selectedDate.day > DateTime.now().day) {
+                          selectedDate = selectedDate.add(Duration(
+                            days: -1,
+                          ));
+                        }
+                      });
+                    },
+                    icon: Icon(
+                      Icons.chevron_left,
+                      size: 30,
+                    )),
+                GestureDetector(
+                  onTap: () {
+                    _selectDate(context);
+                  },
+                  child: Container(
+                      width: MediaQuery.of(context).size.width * 0.76,
+                      height: MediaQuery.of(context).size.height * 0.05,
+                      alignment: Alignment.center,
+                      child: Text(
+                        f.format(selectedDate),
+                        style: TextStyle(fontSize: 20),
+                      )),
                 ),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.25,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                      colors: [
-                        Colors.black.withOpacity(0.7),
-                        Colors.black.withOpacity(0.0),
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.25,
-                  padding: EdgeInsets.all(10),
-                  child: const Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Text(
-                      "Z1 Auto Center",
-                      style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                  ),
-                )
+                IconButton(
+                    onPressed: () {
+                      setState(() {
+                        selectedDate = selectedDate.add(Duration(
+                          days: 1,
+                        ));
+                      });
+                    },
+                    icon: Icon(Icons.chevron_right, size: 30)),
               ],
             ),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.07,
-              decoration: BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(color: Colors.black, width: 1))),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+          ),
+          Container(
+              margin: EdgeInsets.only(top: 5, bottom: 5),
+              width: MediaQuery.of(context).size.width,
+              alignment: Alignment.center,
+              child: Text(
+                "Service",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              )),
+          type(widget.ATitle, Colors.greenAccent),
+          Container(
+              margin: EdgeInsets.only(top: 5, bottom: 5),
+              width: MediaQuery.of(context).size.width,
+              alignment: Alignment.center,
+              child: Text(
+                "Time",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              )),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              type("NotAvailable", Colors.black12),
+              type("Available", Colors.black.withOpacity(0)),
+              type("Picking", Colors.greenAccent)
+            ],
+          ),
+          CustomRadioButton(
+            margin: EdgeInsets.only(left: 2, top: 5),
+
+            enableShape: true,
+            elevation: 0,
+            // horizontal: true,
+            defaultSelected: "8:00 - 9:00 AM",
+            unSelectedBorderColor: Colors.black,
+            selectedBorderColor: Colors.black,
+            enableButtonWrap: true,
+            // width: 120,
+            autoWidth: true,
+            unSelectedColor: Theme.of(context).canvasColor,
+            buttonLables: [
+              "8:00 - 9:00 AM",
+              "9:00 - 10:00 AM",
+              "10:00 - 11:00 AM",
+              "11:00 - 12:00 AM",
+              "1:00 - 2:00 AM",
+              "2:00 - 3:00 AM",
+              "3:00 - 4:00 AM",
+              "4:00 - 5:00 AM",
+            ],
+            buttonValues: [
+              "8:00 - 9:00 AM",
+              "9:00 - 10:00 AM",
+              "10:00 - 11:00 AM",
+              "11:00 - 12:00 AM",
+              "1:00 - 2:00 AM",
+              "2:00 - 3:00 AM",
+              "3:00 - 4:00 AM",
+              "4:00 - 5:00 AM",
+            ],
+            radioButtonValue: (value) {
+              print(value);
+            },
+            selectedColor: Colors.greenAccent,
+          ),
+          CheckboxListTile(
+            checkColor: Colors.white,
+
+            title: Text("Add more Service"), //    <-- label
+            value: isChecked,
+            onChanged: (bool? value) {
+              setState(() {
+                isChecked = value!;
+              });
+            },
+          ),
+          Visibility(
+            child: Expanded(
+              // width: MediaQuery.of(context).size.width,
+              // height: MediaQuery.of(context).size.height*0.1,
+              child: Column(
                 children: [
-                  IconButton(
-                      onPressed: () {
-                        setState(() {
-                          if (selectedDate.year >= DateTime.now().year &&
-                              selectedDate.month >= DateTime.now().month &&
-                              selectedDate.day > DateTime.now().day) {
-                            selectedDate = selectedDate.add(Duration(
-                              days: -1,
-                            ));
-                          }
-                        });
-                      },
-                      icon: Icon(
-                        Icons.chevron_left,
-                        size: 30,
-                      )),
-                  GestureDetector(
-                    onTap: () {
-                      _selectDate(context);
-                    },
-                    child: Container(
-                        width: MediaQuery.of(context).size.width * 0.76,
-                        height: MediaQuery.of(context).size.height * 0.05,
-                        alignment: Alignment.center,
-                        child: Text(
-                          f.format(selectedDate),
-                          style: TextStyle(fontSize: 20),
-                        )),
+                  CheckboxListTile(
+                    title: Text(service[0]),
+                    value: isChecked1, onChanged: (bool? value) {
+                    setState(() {
+                      isChecked1 = value!;
+                    });
+                  },
+                    controlAffinity: ListTileControlAffinity
+                        .leading, //  <-- leading Checkbox
                   ),
-                  IconButton(
-                      onPressed: () {
-                        setState(() {
-                          selectedDate = selectedDate.add(Duration(
-                            days: 1,
-                          ));
-                        });
-                      },
-                      icon: Icon(Icons.chevron_right, size: 30)),
+                  CheckboxListTile(
+                    title: Text(service[1]),
+                    value: isChecked2, onChanged: (bool? value) {
+                    setState(() {
+                      isChecked2 = value!;
+                    });
+                  },
+                    controlAffinity: ListTileControlAffinity
+                        .leading, //  <-- leading Checkbox
+                  ),
+                  CheckboxListTile(
+                    title: Text(service[2]),
+                    value: isChecked3, onChanged: (bool? value) {
+                    setState(() {
+                      isChecked3 = value!;
+                    });
+                  },
+                    controlAffinity: ListTileControlAffinity
+                        .leading, //  <-- leading Checkbox
+                  ),
                 ],
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(top: 5, bottom: 5),
-              width: MediaQuery.of(context).size.width,
-                alignment: Alignment.center,
-                child: Text(
-              "Time",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            )),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                type("NotAvailable", Colors.black12),
-                type("Available", Colors.black.withOpacity(0)),
-                type("Picking", Colors.greenAccent)
-              ],
-            ),
-            CustomRadioButton(
-              margin: EdgeInsets.only(left: 2, top: 5),
-
-              enableShape: true,
-              elevation: 0,
-              // horizontal: true,
-              defaultSelected: "8:00 - 9:00 AM",
-              unSelectedBorderColor: Colors.black,
-              selectedBorderColor: Colors.black,
-              enableButtonWrap: true,
-              // width: 120,
-              autoWidth: true,
-              unSelectedColor: Theme.of(context).canvasColor,
-              buttonLables: [
-                "8:00 - 9:00 AM",
-                "9:00 - 10:00 AM",
-                "10:00 - 11:00 AM",
-                "11:00 - 12:00 AM",
-                "1:00 - 2:00 AM",
-                "2:00 - 3:00 AM",
-                "3:00 - 4:00 AM",
-                "4:00 - 5:00 AM",
-              ],
-              buttonValues: [
-                "8:00 - 9:00 AM",
-                "9:00 - 10:00 AM",
-                "10:00 - 11:00 AM",
-                "11:00 - 12:00 AM",
-                "1:00 - 2:00 AM",
-                "2:00 - 3:00 AM",
-                "3:00 - 4:00 AM",
-                "4:00 - 5:00 AM",
-              ],
-              radioButtonValue: (value) {
-                print(value);
-              },
-              selectedColor: Colors.greenAccent,
-            ),
-            Container(
-                margin: EdgeInsets.only(top: 5, bottom: 5),
-                width: MediaQuery.of(context).size.width,
-                alignment: Alignment.center,
-                child: Text(
-                  "Service",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                )),
-            CustomRadioButton(
-              margin: EdgeInsets.only(left: 2, top: 5),
-
-              enableShape: true,
-              elevation: 0,
-              // horizontal: true,
-              defaultSelected: "8:00 - 9:00 AM",
-              unSelectedBorderColor: Colors.black,
-              selectedBorderColor: Colors.black,
-              enableButtonWrap: true,
-              // width: 120,
-              autoWidth: true,
-
-              unSelectedColor: Theme.of(context).canvasColor,
-              buttonLables: [
-                "Tire repair",
-                "Cleaning",
-                "Engine Repair",
-                "Re-Pain",
-
-              ],
-              buttonValues: [
-                "8:00 - 9:00 AM",
-                "9:00 - 10:00 AM",
-                "10:00 - 11:00 AM",
-                "11:00 - 12:00 AM",
-
-              ],
-              radioButtonValue: (value) {
-                print(value);
-              },
-              selectedColor: Colors.greenAccent,
-            ),
-            CheckboxListTile(
-              checkColor: Colors.white,
-
-              title: Text("Add more Service"), //    <-- label
-              value: isChecked,
-              onChanged: (bool? value) {
-                setState(() {
-                  isChecked = value!;
-                });
-              },
-            )
-          ],
-        ),
+            maintainSize: true,
+            maintainAnimation: true,
+            maintainState: true,
+            visible: isChecked,
+          ),
+        ],
       ),
       bottomNavigationBar: Container(
           margin: EdgeInsets.all(5),
@@ -371,14 +401,13 @@ class _BookingPageState extends State<BookingPage> {
                           height: 50,
                           padding: EdgeInsets.all(10),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            border: Border.all(width: 0.5)
-                          ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              border: Border.all(width: 0.5)),
                           child: TextField(
                             style: TextStyle(fontSize: 20),
                             decoration: new InputDecoration.collapsed(
-                                hintText: 'Your Promotion Code'
-                            ),
+                                hintText: 'Your Promotion Code'),
                           ),
                         )
                       ],

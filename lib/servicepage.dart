@@ -76,7 +76,7 @@ class _DashboardState extends State<DashboardScreen> {
     return GestureDetector(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return BookingPage(); //Routing Home Page in here
+          return BookingPage(ATitle: widget.ATitle,); //Routing Home Page in here
         }));
       },
       child: Container(

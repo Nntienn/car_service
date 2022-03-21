@@ -172,9 +172,9 @@ class _StationPageState extends State<StationPage> {
               borderRadius: BorderRadius.all(Radius.circular(20))),
           child: TextButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return BookingPage(); //Routing Home Page in here
-              }));
+              // Navigator.push(context, MaterialPageRoute(builder: (context) {
+              //   return BookingPage(); //Routing Home Page in here
+              // }));
             },
             child: Text(
               "Book Service",
